@@ -11,7 +11,7 @@ class FoodType(models.Model):
 class Food(models.Model):
     name = models.TextField(max_length=30)
     description = models.TextField(max_length=300)
-    img = models.IntegerField()
+    img = models.ImageField()
     type = models.ForeignKey(FoodType, on_delete=models.PROTECT, null=True)
 
     def __str__(self):
