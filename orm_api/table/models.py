@@ -9,9 +9,9 @@ class FoodType(models.Model):
 
 
 class Food(models.Model):
-    name = models.TextField(max_length=30)
+    name = models.CharField(max_length=100)
     description = models.TextField(max_length=300)
-    img = models.ImageField()
+    img = models.ImageField(blank=True)
     type = models.ForeignKey(FoodType, on_delete=models.PROTECT, null=True)
 
     def __str__(self):

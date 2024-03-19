@@ -16,9 +16,22 @@
         </div>
     </header>
 
+    <div class="food-configuration">
+
+    </div>
 
     <div class="main-content">
-        {{ a }}
+        {% for f in food %}
+            <div class="food">
+                <div class="description">
+                    <h3>{{ f.name }}</h3>
+                    <p>{{ f.description }}</p>
+                </div>
+                <div class="img">
+                    <img src="static\img\tomato.png">
+                </div>
+            </div>
+        {% endfor %}
     </div>
 </body>
 </html>
