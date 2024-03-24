@@ -1,5 +1,5 @@
 /* styles.css */
-section {
+section, button{
     padding-top: 10px;
     padding-bottom: 10px;
 }
@@ -7,5 +7,10 @@ section {
 .plain-link {
     color: inherit;
     text-decoration: none;
+}
+
+.img{
+    padding-top: 10px;
+    padding-bottom: 10px;
 }
 

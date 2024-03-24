@@ -1,5 +1,7 @@
 from django.shortcuts import render
-from .models import Food, FoodType
+
+from .models import Food
+from .models import FoodType
 
 
 def food(request):
@@ -11,6 +13,28 @@ def food(request):
 
 
 def vegetables_fruits(request):
-    foods = Food.objects.all()
-    return render(request, 'vegetables_fruits.html', {'foods': foods})
+    sort_by = request.GET.get('sort_by', 'name')
+    fruit_checked = request.GET.get('fruit') == 'on'
+    vegetable_checked = request.GET.get('vegetable') == 'on'
 
+    foods = Food.objects.all()
+    if fruit_checked and vegetable_checked:
+        foods = foods.filter(type__name__in=['Фрукты', 'Овощи'])
+    elif fruit_checked:
+        foods = foods.filter(type__name='Фрукты')
+    elif vegetable_checked:
+        foods = foods.filter(type__name='Овощи')
+
+    if sort_by == 'useful_elements_asc':
+        foods = foods.order_by('useful_elements')
+    elif sort_by == 'useful_elements_desc':
+        foods = foods.order_by('-useful_elements')
+    else:
+        foods = foods.order_by('name')
+
+    context = {
+        'foods': foods,
+        'fruit_checked': fruit_checked,
+        'vegetable_checked': vegetable_checked,
+    }
+    return render(request, 'vegetables_fruits.html', context)
