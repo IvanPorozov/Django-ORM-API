@@ -1,7 +1,19 @@
 from django.shortcuts import render
+from rest_framework import viewsets
 
 from .models import Food
 from .models import FoodType
+from .serializers import FoodSerializer, FoodTypeSerializer
+
+
+class FoodTypeViewSet(viewsets.ModelViewSet):
+    queryset = FoodType.objects.all()
+    serializer_class = FoodTypeSerializer
+
+
+class FoodViewSet(viewsets.ModelViewSet):
+    queryset = Food.objects.all()
+    serializer_class = FoodSerializer
 
 
 def food(request):
