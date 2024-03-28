@@ -1,0 +1,12 @@
+{% extends 'base.html' %}
+
+{% block title %}Food{% endblock %}
+
+{% block content %}
+<section>
+    <div class="container">
+        <h1>{{ food.name }}</h1>
+        <p>{{ food.description }}</p>
+    </div>
+</section>
+{% endblock content %}

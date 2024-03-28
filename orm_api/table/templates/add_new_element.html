@@ -1,0 +1,38 @@
+{% extends 'base.html' %}
+
+{% block title %}Food{% endblock %}
+
+{% block content %}
+<section>
+    <div class="container">
+        <form method="post" action="{% url 'add_new_element' %}" class="row g-3">
+            {% csrf_token %}
+            <div class="mb-3">
+                <label for="exampleInputEmail1" class="form-label">{{ form.name.label_tag }}</label>
+                <input type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" name="{{ form.name.name }}">
+            </div>
+            <div class="mb-3">
+                <label for="exampleFormControlTextarea1" class="form-label">{{ form.description.label_tag }}</label>
+                <textarea class="form-control" id="exampleFormControlTextarea1" rows="3" name="{{ form.description.name }}">{{ form.description.value|default_if_none:'' }}</textarea>
+            </div>
+
+            <div class="mb-3">
+                <label for="formFile" class="form-label">Загрузить изображение</label>
+                <input class="form-control" type="file" id="formFile" name="{{ form.img.name }}">
+            </div>
+            <div class="mb-3">
+                <label for="typeSelect" class="form-label">{{ form.type.label }}</label>
+                <select class="form-select" id="typeSelect" name="{{ form.type.name }}">
+                    {% for choice in form.type.field.choices %}
+                    <option value="{{ choice.0 }}" {% if form.type.value == choice.0 %}selected{% endif %}>{{ choice.1 }}</option>
+                    {% endfor %}
+                </select>
+            </div>
+            <div class="col-12">
+                <button type="submit" class="btn btn-primary btn-success" name="action" value="create">Создать</button>
+            </div>
+        </form>
+    </div>
+</section>
+
+{% endblock content %}

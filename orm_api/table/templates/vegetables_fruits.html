@@ -7,30 +7,16 @@
     <div class="container text-center">
         <section>
             <form method="GET">
-                <div class="col">
+                <div class="col" id="sortBySelect">
                     <select class="form-select" aria-label="Default select example" name="sort_by">
-                        <option value="name">По алфавиту</option>
-                        <option value="useful_elements_asc">По возрастанию количества полезных элементов</option>
-                        <option value="useful_elements_desc">По убыванию количества полезных элементов</option>
+                        <option value="alpha">По алфавиту</option>
+                        <option value="vegetables">Овощи</option>
+                        <option value="fruits">Фрукты</option>
                     </select>
                 </div>
                 <section>
-                    <div class="row">
-                        <div class="col">
-                            <div class="form-check form-switch custom-switch">
-                                <input class="form-check-input" type="checkbox" id="fruitCheckbox" name="fruit" {% if fruit_checked %}checked{% endif %}>
-                                <label class="form-check-label" for="fruitCheckbox">Фрукты</label>
-                            </div>
-                        </div>
-                        <div class="col">
-                            <div class="form-check form-switch">
-                                <input class="form-check-input" type="checkbox" id="vegetableCheckbox" name="vegetable" {% if vegetable_checked %}checked{% endif %}>
-                                <label class="form-check-label" for="vegetableCheckbox">Овощи</label>
-                            </div>
-                        </div>
-                    </div>
                 </section>
-                <button type="submit" class="btn btn-primary d-md-block">Подтвердить</button>
+                <button type="submit" class="btn btn-primary d-md-block btn-success">Подтвердить</button>
             </form>
         </section>
 
@@ -43,7 +29,9 @@
                         <h5 class="text-start">{{ food.name }}</h5>
                         <p class="text-start">{{ food.description|truncatechars:200 }}</p>
                         <div class="d-grid gap-2 d-md-flex justify-content-md-end">
-                            <button class="btn btn-primary btn-success" type="button">Узнать больше</button>
+                                <a href="{% url 'food_detail' food.id %}" class="btn btn-primary btn-success">
+                                Узнать больше
+                            </a>
                         </div>
                         {% endfor %}
                     </div>

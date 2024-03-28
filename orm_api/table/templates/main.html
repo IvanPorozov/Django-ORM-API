@@ -32,7 +32,9 @@
                                         <h5 class="card-title">{{ f.name }}</h5>
                                         <p class="card-text">{{ f.description|truncatechars:100 }}</p>
                                         <div class="d-grid gap-2">
-                                            <a href="{{v.name}}/" class="btn btn-primary btn-success">Узнать больше</a>
+                                            <a href="{% url 'food_detail' f.id %}" class="btn btn-primary btn-success">
+                                                Узнать больше
+                                            </a>
                                         </div>
                                     </div>
                                 </div>
@@ -50,7 +52,9 @@
                                         <h5 class="card-title">{{ v.name }}</h5>
                                         <p class="card-text">{{ v.description|truncatechars:100 }}</p>
                                         <div class="d-grid gap-2">
-                                            <a href="{{v.name}}/" class="btn btn-primary btn-success">Узнать больше</a>
+                                            <a href="{% url 'food_detail' v.id %}" class="btn btn-primary btn-success">
+                                                Узнать больше
+                                            </a>
                                         </div>
                                     </div>
                                 </div>

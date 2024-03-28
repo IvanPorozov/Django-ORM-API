@@ -1,6 +1,7 @@
-from django.shortcuts import render
+from django.shortcuts import render, get_object_or_404
 from rest_framework import viewsets
 
+from .forms import AddNewElementForm
 from .models import Food
 from .models import FoodType
 from .serializers import FoodSerializer, FoodTypeSerializer
@@ -17,36 +18,44 @@ class FoodViewSet(viewsets.ModelViewSet):
 
 
 def food(request):
-    vegetables_type = FoodType.objects.get(name='Vegetables')
+    vegetables_type = FoodType.objects.get(name='Овощ')
     vegetables = Food.objects.filter(type=vegetables_type)
-    fruits_type = FoodType.objects.get(name='Fruits')
+    fruits_type = FoodType.objects.get(name='Фрукт')
     fruits = Food.objects.filter(type=fruits_type)
     return render(request, 'main.html', {'vegetables': vegetables, 'fruits': fruits})
 
 
 def vegetables_fruits(request):
     sort_by = request.GET.get('sort_by', 'name')
-    fruit_checked = request.GET.get('fruit') == 'on'
-    vegetable_checked = request.GET.get('vegetable') == 'on'
-
+    vegetables_type = FoodType.objects.get(name='Овощ')
+    fruits_type = FoodType.objects.get(name='Фрукт')
     foods = Food.objects.all()
-    if fruit_checked and vegetable_checked:
-        foods = foods.filter(type__name__in=['Фрукты', 'Овощи'])
-    elif fruit_checked:
-        foods = foods.filter(type__name='Фрукты')
-    elif vegetable_checked:
-        foods = foods.filter(type__name='Овощи')
 
-    if sort_by == 'useful_elements_asc':
-        foods = foods.order_by('useful_elements')
-    elif sort_by == 'useful_elements_desc':
-        foods = foods.order_by('-useful_elements')
-    else:
+    if sort_by is None:
+        return
+    elif sort_by == 'vegetables':
+        foods = foods.filter(type=vegetables_type)
+    elif sort_by == 'fruits':
+        foods = foods.filter(type=fruits_type)
+    elif sort_by == 'alpha':
         foods = foods.order_by('name')
 
     context = {
         'foods': foods,
-        'fruit_checked': fruit_checked,
-        'vegetable_checked': vegetable_checked,
     }
     return render(request, 'vegetables_fruits.html', context)
+
+
+def add_new_element(request):
+    if request.method == 'POST':
+        form = AddNewElementForm(request.POST, request.FILES)
+        if form.is_valid():
+            form.save()
+    else:
+        form = AddNewElementForm()
+    return render(request, 'add_new_element.html', {'form': form})
+
+
+def food_detail(request, pk):
+    food = get_object_or_404(Food, pk=pk)
+    return render(request, 'food_detail.html', {'food': food})
