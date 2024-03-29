@@ -3,6 +3,7 @@ https://github.com/IvanPorozov/Django-ORM-API/assets/139009015/b65929dd-95c7-4a5
 
 # Django ORM
 https://github.com/IvanPorozov/Django-ORM-API/assets/139009015/39a53d0d-88d7-4d79-9eb9-c2f30930fe23
+
 https://github.com/IvanPorozov/Django-ORM-API/assets/139009015/7fe22fdc-b95e-4693-8fa9-d5265ff6fbda
 
 # DRF
