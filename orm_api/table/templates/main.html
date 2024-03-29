@@ -8,7 +8,10 @@
             <div class="row align-items-center">
                 <div class="col-8">
                     <h1>Добро пожаловать на сайт фруктов и овощей</h1>
-                    <p>Этот сайт был создан для демонстрации моих знаний в использовании ORM, Django, API и Bootstrap</p>
+                    <p>
+                        Этот сайт был создан для демонстрации моих знаний в использовании Django ORM, DRF, API и
+                        Bootstrap
+                    </p>
                 </div>
                 <div class="col-4">
                     <img class="w-100" src="static/img/vegetables_and_fruits.jpg" name="Vegetables and fruits">
@@ -19,14 +22,13 @@
     <section>
         <div class="container">
            <h2><a href="#" class="plain-link">Фрукты и овощи</a></h2>
-
             <div id="carouselExample" class="carousel slide">
                 <div class="carousel-inner">
                     <div class="carousel-item active">
                         <div class="row justify-content-between">
                             {% for f in fruits|slice:":4" %}
                             <div class="col">
-                                <div class="card" style="width: 18rem;">
+                                <div class="card w-100">
                                     <img src="{{ f.img.url }}" class="card-img-top" alt="{{ f.name }}">
                                     <div class="card-body">
                                         <h5 class="card-title">{{ f.name }}</h5>
@@ -46,7 +48,7 @@
                         <div class="row justify-content-between">
                             {% for v in vegetables|slice:":4" %}
                             <div class="col">
-                                <div class="card" style="width: 18rem;">
+                                <div class="card w-100">
                                     <img src="{{ v.img.url }}" class="card-img-top" alt="...">
                                     <div class="card-body">
                                         <h5 class="card-title">{{ v.name }}</h5>
